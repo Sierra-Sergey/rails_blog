@@ -14,7 +14,7 @@ class PostsController < ApplicationController
     @authors = Author.all
   end
 
-  def show_a
+  def show_author
 
   end
 

@@ -1,8 +1,8 @@
-<% @authors.each do |a| %>
-  <h3><%= a.first_name %></h3>
-  <h3><%= a.last_name %></h3>
-  <h3><%= a.gender %></h3>
-  <h3><%= a.birthday %></h3>
-  <%= link_to 'Author', a %>
+<% @authors.each do |author| %>
+  <h3><%= author.first_name %></h3>
+  <h3><%= author.last_name %></h3>
+  <h3><%= author.gender %></h3>
+  <h3><%= author.birthday %></h3>
+  <%= link_to 'Author', author %>
   <hr><hr>
 <% end %>
