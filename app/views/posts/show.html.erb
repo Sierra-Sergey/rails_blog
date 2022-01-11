@@ -1,19 +1,22 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
-
-<p>
-  <strong>Content:</strong>
-  <%= @post.content %>
-</p>
-
-<p>
-  <strong>Image:</strong>
-  <%= @post.image %>
-</p>
-
-<%= link_to 'Edit', edit_post_path(@post) %> |
+<div class="post">
+  <div class="block bg-primary bg-opacity-75 text-center col-6">
+    <div class="">
+        <h1><%= @post.title %></h1>
+    </div>
+    <br><br>
+    <div class="">
+        <h4><%= @post.content %></h4>
+    </div>
+    <br><br>
+    <div class="">
+        <%= image_tag(@post.image, style: "max-height: 300px; max-width: 300px") if @post.image %>
+    </div>
+    <br><br>
+  </div>
+</div>
+<br>
+<%= link_to 'Edit', edit_post_path(@post) %>
 <%= link_to 'Back', posts_path %>
+
+<%= link_to 'AUTHOR', @post.author %>

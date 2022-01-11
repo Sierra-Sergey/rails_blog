@@ -1,0 +1,10 @@
+<% @authors.each do |author| %>
+  <div class="">
+    <h2><%= author.first_name %></h2>
+    <h2><%= author.last_name %></h2>
+    <h2><%= author.gender %></h2>
+    <h2><%= author.birthday %></h2>
+    <%= link_to 'Show', author %>
+  </div>
+  <hr>
+<% end %>

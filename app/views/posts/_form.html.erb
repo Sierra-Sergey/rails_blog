@@ -27,7 +27,7 @@
   </div>
 
   <div class="field">
-    <%= form.select :author_id, Author.all.collect { |a| [a.first_name, a.id] } %>
+    <%= form.select :author_id, Author.all.collect { |a| ["#{a.first_name} #{a.last_name}", a.id] } %>
   </div>
 
   <div class="actions">

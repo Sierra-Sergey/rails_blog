@@ -10,10 +10,17 @@ class PostsController < ApplicationController
   def show
   end
 
+  def authors
+    @authors = Author.all
+  end
+
+  def show_a
+
+  end
+
   # GET /posts/new
   def new
     @post = Post.new
-    @authors = Author.all
   end
 
   # GET /posts/1/edit
@@ -62,10 +69,11 @@ class PostsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_post
       @post = Post.find(params[:id])
+      @author = Author.find(@post.author_id)
     end
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:title, :content, :image)
+      params.require(:post).permit(:title, :content, :image, :author_id)
     end
 end

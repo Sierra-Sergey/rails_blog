@@ -1,3 +1,5 @@
+<p id="notice"><%= notice %></p>
+
 <div class="container-fluid">
 
     <div >
@@ -6,11 +8,10 @@
       <% @posts.each do |post| %>
         <div class="post_title">
           <h2><%= post.title %></h2>
-          <h6><i class="bi bi-clock"></i> Post by  </h6>
+          <h6><i class="bi bi-clock"></i> Post by <%= "#{post.author.first_name} #{post.author.last_name} #{post.created_at}" %> </h6>
         </div>
         <div class="post_content">
           <p><%= post.content %></p>
-          <%= post.image %>
         </div>
         <%= link_to 'Show', post %>
         <%= link_to 'Edit', edit_post_path(post) %>
