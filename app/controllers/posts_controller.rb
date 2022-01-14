@@ -70,7 +70,6 @@ class PostsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_post
       @post = Post.find(params[:id])
-      @author = Author.find(@post.author_id)
     end
 
     def set_author
