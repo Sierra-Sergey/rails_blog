@@ -1,20 +1,18 @@
-<% author = Author.find(params[:format]) %>
-
 <table class="table table-hover table-bordered table-striped col-4">
   <tr>
     <td>First Name</td>
-    <td><%= author.first_name %></td>
+    <td><%= @author.first_name %></td>
   </tr>
   <tr>
     <td>Last Name</td>
-    <td><%= author.last_name %></td>
+    <td><%= @author.last_name %></td>
   </tr>
   <tr>
     <td>Gender</td>
-    <td><%= author.gender %></td>
+    <td><%= @author.gender %></td>
   </tr>
   <tr>
     <td>Birthday</td>
-    <td><%= author.birthday %></td>
+    <td><%= @author.birthday %></td>
   </tr>
 </table>
