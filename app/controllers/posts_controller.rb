@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
+  before_action :set_author, only: %i[ show_author ]
 
   # GET /posts or /posts.json
   def index
@@ -15,7 +16,7 @@ class PostsController < ApplicationController
   end
 
   def show_author
-
+    @author = Author.find(params[:id])
   end
 
   # GET /posts/new
@@ -71,6 +72,11 @@ class PostsController < ApplicationController
       @post = Post.find(params[:id])
       @author = Author.find(@post.author_id)
     end
+
+    def set_author
+      @author = Author.find(params[:id])
+    end
+
 
     # Only allow a list of trusted parameters through.
     def post_params
