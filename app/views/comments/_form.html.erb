@@ -1,0 +1,14 @@
+<%= form_with model: [@post, @post.comments.build] do |form| %>
+  <div class="field">
+    <%= form.label :body %>
+    <%= form.text_area(:body, class: 'form-control') %>
+  </div>
+
+  <div class="field">
+    <%= form.select :author_id, Author.all.collect { |a| ["#{a.first_name} #{a.last_name}", a.id] } %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

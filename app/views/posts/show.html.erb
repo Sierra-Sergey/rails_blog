@@ -6,7 +6,7 @@
     </div>
     <br><br>
     <div class="">
-        <h4><%= @post.content %></h4>
+        <%= simple_format(@post.content, {}, wrapper_tag: 'h4') %>
     </div>
     <br><br>
     <div class="">
@@ -20,3 +20,19 @@
 <%= link_to 'Back', posts_path %>
 
 <%= link_to 'AUTHOR', @post.author %>
+<hr>
+<h3>Comments</h3>
+<div class="">
+  <% @post.comments.each do |comment| %>
+    <div class="">
+      <%= "#{comment.author.first_name}: #{comment.body}" %>
+      <%= link_to 'Destroy', [comment.post, comment], method: :delete, data: { confirm: 'Are you sure?' } %>
+
+    </div>
+  <% end %>
+</div>
+<hr>
+<h3>Add Comment</h3>
+<%= render 'comments/form', comment: @comment %>
+
+<%= params %>
