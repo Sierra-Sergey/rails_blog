@@ -1,7 +1,7 @@
 <%= form_with(model: @comment, scope: :status, url: @post) do |form| %>
 
   <div class="field">
-    <%= form.select :status, Comment.statuses { |a| a } %>
+    <%= form.select :status, Comment.statuses { |a| a }, selected: 1 %>
   </div>
 
   <div class="actions">
