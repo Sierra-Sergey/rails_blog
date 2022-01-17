@@ -3,7 +3,7 @@ class Comment < ApplicationRecord
   belongs_to :post, counter_cache: true
   validates :body, presence: true
 
-  enum status: {unpublished: 0, published: 1}
+  enum status: [:unpublished, :published]
 
   scope :published, -> { where(status: 1) }
   scope :unpublished, -> { where(status: 0) }

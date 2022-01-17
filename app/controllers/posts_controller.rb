@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
   before_action :set_author, only: %i[ show_author ]
-  before_action :update_views_counter, only: %i[ show ]
+  # before_action :update_views_counter, only: %i[ show ]
 
   # GET /posts or /posts.json
   def index

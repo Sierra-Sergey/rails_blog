@@ -12,7 +12,6 @@
     <div class="">
         <%= image_tag(@post.image, style: "max-height: 300px; max-width: 300px") if @post.image %>
     </div>
-    <br><br>
   </div>
 </div>
 <p>Updated: <%= distance_of_time_in_words(@post.updated_at, Time.now) %> ago</p>
@@ -24,24 +23,10 @@
 <hr>
 <h3>Comments</h3>
 <div class="">
-  <% @post.comments.each do |comment| %>
-    <% if comment.save %>
-      <div class="comment_block">
-        <div class="d-flex">
-          <div class="author_name col-2">
-            <%= simple_format(comment.author.first_name) %>
-          </div>
-          <div class="comment_body col-9">
-            <%= simple_format(comment.body) %>
-          </div>
-        </div>
-        <div class="">
-          Updated: <%= distance_of_time_in_words(comment.updated_at, Time.now) %> ago <br>
-        </div>
-        <%= link_to 'Destroy', [comment.post, comment], method: :delete, data: { confirm: 'Are you sure?' } %>
-      </div>
-    <% end %>
-  <% end %>
+  <%= render 'posts/change_status_view_comments' %>
+</div>
+<div class="">
+  <%= render 'comments/comments' %>
 </div>
 <hr>
 <h3>Add Comment</h3>
