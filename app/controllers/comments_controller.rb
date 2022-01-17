@@ -9,24 +9,22 @@ class CommentsController < ApplicationController
         format.html { redirect_to @post, notice: "Comment was successfully created." }
         # format.json { render :show, status: :created, location: @comment }
       else
-        format.html { redirect_to @post }
+        format.html { render 'posts/show', status: :unprocessable_entity }
         # format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def destroy
-    @post = Post.find(params[:post_id])
-    @comment = @post.comments.find(params[:id])
+    @comment = Comment.find(params[:id])
     @comment.destroy
     respond_to do |format|
       format.html { redirect_to @comment.post, notice: "Comment was successfully destroyed." }
     end
-
   end
 
   private
   def comment_params
-    params.require(:comment).permit(:body, :status, :post_id, :author_id)
+    params.require(:comment).permit(:body, :post_id, :author_id)
   end
 end

@@ -25,9 +25,10 @@
 <div class="">
   <% @post.comments.each do |comment| %>
     <div class="">
-      <%= "#{comment.author.first_name}: #{comment.body}" %>
-      <%= link_to 'Destroy', [comment.post, comment], method: :delete, data: { confirm: 'Are you sure?' } %>
-
+      <% if comment.save %>
+        <%= "#{comment.author.first_name}: #{comment.body}" %>
+        <%= link_to 'Destroy', [comment.post, comment], method: :delete, data: { confirm: 'Are you sure?' } %>
+      <% end %>
     </div>
   <% end %>
 </div>
