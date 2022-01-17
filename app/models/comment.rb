@@ -1,6 +1,6 @@
 class Comment < ApplicationRecord
   belongs_to :author
-  belongs_to :post
+  belongs_to :post, counter_cache: true
   validates :body, presence: true
 
   enum status: {unpublished: 0, published: 1}

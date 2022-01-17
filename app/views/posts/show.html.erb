@@ -15,7 +15,8 @@
     <br><br>
   </div>
 </div>
-<br>
+<p>Updated: <%= distance_of_time_in_words(@post.updated_at, Time.now) %> ago</p>
+<br><br>
 <%= link_to 'Edit', edit_post_path(@post) %>
 <%= link_to 'Back', posts_path %>
 
@@ -24,12 +25,22 @@
 <h3>Comments</h3>
 <div class="">
   <% @post.comments.each do |comment| %>
-    <div class="">
-      <% if comment.save %>
-        <%= "#{comment.author.first_name}: #{comment.body}" %>
+    <% if comment.save %>
+      <div class="comment_block">
+        <div class="d-flex">
+          <div class="author_name col-2">
+            <%= simple_format(comment.author.first_name) %>
+          </div>
+          <div class="comment_body col-9">
+            <%= simple_format(comment.body) %>
+          </div>
+        </div>
+        <div class="">
+          Updated: <%= distance_of_time_in_words(comment.updated_at, Time.now) %> ago <br>
+        </div>
         <%= link_to 'Destroy', [comment.post, comment], method: :delete, data: { confirm: 'Are you sure?' } %>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
   <% end %>
 </div>
 <hr>
