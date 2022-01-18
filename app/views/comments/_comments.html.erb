@@ -1,14 +1,17 @@
-<% if params[:status] == nil || params[:status] == {"status"=>"1"}  %>
-<h4>Published comments</h4>
-  <% @post.comments.published.each do |comment| %>
+<% if params[:status] == {"status"=>"0"}  %>
+<h4>Unpublished comments</h4>
+  <% @post.comments.unpublished.each do |comment| %>
     <% if comment.save %>
       <div class="comment_block">
         <div class="d-flex">
           <div class="author_name col-2">
-            <%= simple_format(comment.author.first_name) %>
+            <%= "#{comment.author.first_name}:" %>
           </div>
           <div class="comment_body col-9">
             <%= simple_format(comment.body) %>
+          </div>
+          <div class="col-1">
+            <%= link_to "Publish", post_comment_path(comment.post, comment), method: :patch %>
           </div>
         </div>
         <div class="">
@@ -19,13 +22,13 @@
     <% end %>
   <% end %>
 <% else %>
-<h4>Unpublished comments</h4>
-  <% @post.comments.unpublished.each do |comment| %>
+<h4>Published comments</h4>
+  <% @post.comments.published.each do |comment| %>
     <% if comment.save %>
       <div class="comment_block">
         <div class="d-flex">
           <div class="author_name col-2">
-            <%= simple_format(comment.author.first_name) %>
+            <%= "#{comment.author.first_name}:" %>
           </div>
           <div class="comment_body col-9">
             <%= simple_format(comment.body) %>
