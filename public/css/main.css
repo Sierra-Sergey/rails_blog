@@ -11,16 +11,16 @@
 }
 
 .block {
-    background: #60a839;
-    margin: auto;
-    border-radius: 100px;
-    min-width: 400px;
-    padding: 20px;
+  background: #60a839;
+  margin: auto;
+  border-radius: 100px;
+  min-width: 400px;
+  padding: 20px;
+}
 
-    img {
-        display: block;
-        border: none;
-    }
+img {
+  display: block;
+  border: none;
 }
 
 #alert {

@@ -19,7 +19,6 @@
       <%= link_to 'Main', posts_path %>
       <%= link_to 'My page', author_path(current_author) if current_author %>
       <br>
-      <%= link_to 'AUTHORS', authors_path %>
 
       <% if current_author %>
         Logged in as <%= current_author.email %>.

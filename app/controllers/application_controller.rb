@@ -15,4 +15,8 @@ class ApplicationController < ActionController::Base
     current_author != comment.author
   end
   helper_method :deny_edit
+
+  def set_visits
+    cookies[:visits] = cookies[:visits].present? ? cookies[:visits].to_i + 1 : 1
+  end
 end

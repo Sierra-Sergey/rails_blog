@@ -2,7 +2,8 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
   before_action :update_views_counter, only: %i[ show ]
   before_action :authorize, only: %i[new create edit update]
-  before_action :not_post_owner , only: %i[ destroy edit update ]
+  before_action :post_author?, only: %i[ destroy edit update ]
+  before_action :set_visits, only: %i[ index show ]
 
   # GET /posts or /posts.json
   def index
@@ -81,7 +82,7 @@ class PostsController < ApplicationController
       params.require(:post).permit(:title, :content, :image, :author_id)
     end
 
-    def not_post_owner
+    def post_author?
       redirect_to root_url, alert: 'Not your post' if current_author != @post.author
     end
 end

@@ -1,6 +1,7 @@
 class AuthorsController < ApplicationController
   before_action :set_author, only: %i[ show edit update destroy ]
   before_action :access_denied, only: %i[ destroy edit update ]
+  before_action :set_visits, only: %i[ show ]
 
   def new
     @author = Author.new
