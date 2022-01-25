@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   end
 
   def deny_edit(comment)
-    Time.now - comment.created_at > 1.minute ||
+    Time.now - comment.created_at > 1.hour ||
     current_author != comment.author
   end
   helper_method :deny_edit
