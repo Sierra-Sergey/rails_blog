@@ -1,0 +1,34 @@
+<%= form_for @author do |f| %>
+  <% if @author.errors.any? %>
+    <div class="error_messages">
+      <h2>Form is invalid</h2>
+      <ul>
+        <% @author.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="field">
+  <%= f.label :first_name %><br/>
+  <%= f.text_field :first_name %>
+</div>
+<div class="field">
+  <%= f.label :last_name %><br/>
+  <%= f.text_field :last_name %>
+</div>
+<div class="field">
+  <%= f.label :birthday %><br/>
+  <%= f.text_field :birthday %>
+</div>
+<div class="field">
+  <%= f.label :gender %><br/>
+  <%= f.text_field :gender %>
+</div>
+<div class="field">
+  <%= f.label :avatar %><br/>
+  <%= f.text_field :avatar %>
+</div>
+<div class="actions"><%= f.submit "Save changes" %></div>
+<% end %>

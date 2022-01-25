@@ -1,7 +1,7 @@
 <%= form_with(model: @comment, scope: :status, url: @post) do |form| %>
 
   <div class="field">
-    <%= form.select :status, Comment.statuses { |a| a }, selected: params[:status] == {"status"=>"0"} ? 0 : 1 %>
+    <%= form.select :status, Comment.statuses.keys { |s| s }, selected: params[:status] == {"status"=>"unpublished"} ? 'unpublished' : 'published' %>
   </div>
 
   <div class="actions">

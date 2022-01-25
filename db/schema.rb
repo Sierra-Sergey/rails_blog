@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_17_185935) do
+ActiveRecord::Schema.define(version: 2022_01_15_114105) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,9 @@ ActiveRecord::Schema.define(version: 2022_01_17_185935) do
     t.string "last_name"
     t.string "gender"
     t.date "birthday"
+    t.string "avatar"
+    t.string "email"
+    t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -40,10 +43,10 @@ ActiveRecord::Schema.define(version: 2022_01_17_185935) do
     t.text "content"
     t.string "image"
     t.bigint "author_id"
+    t.integer "comments_count"
+    t.integer "views_count", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "views_count", default: 0
-    t.integer "comments_count", default: 0
     t.index ["author_id"], name: "index_posts_on_author_id"
   end
 

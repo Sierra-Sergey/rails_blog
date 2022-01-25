@@ -5,6 +5,9 @@ class CreateAuthors < ActiveRecord::Migration[6.1]
       t.string :last_name
       t.string :gender
       t.date :birthday
+      t.string :avatar
+      t.string :email
+      t.string :password_digest
 
       t.timestamps
     end

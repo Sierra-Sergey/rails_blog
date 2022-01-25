@@ -1,5 +1,5 @@
 <%= form_with(model: [@post, @comment]) do |form| %>
-  <% if comment.errors.any? %>
+  <% if @comment.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(comment.errors.count, "error") %> prohibited this article from being saved:</h2>
       <ul>
@@ -14,10 +14,7 @@
     <%= form.label :body %>
     <%= form.text_area(:body, class: 'form-control') %>
   </div>
-
-  <div class="field">
-    <%= form.select :author_id, Author.all.collect { |a| [a.full_name, a.id] } %>
-  </div>
+  <%= form.hidden_field :author_id, value: current_author.id %>
 
   <div class="actions">
     <%= form.submit %>

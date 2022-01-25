@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+<p id="alert"><%= alert %></p>
+
+<div class="container">
+<%= image_tag(current_author.avatar, class: 'avatar', style: "max-height: 300px; max-width: 300px") %><br><br>
+
+  <table class="table table-hover table-bordered table-striped col-4">
+    <tr>
+      <td>First Name</td>
+      <td><%= @author.first_name %></td>
+    </tr>
+    <tr>
+      <td>Last Name</td>
+      <td><%= @author.last_name %></td>
+    </tr>
+    <tr>
+      <td>Gender</td>
+      <td><%= @author.gender %></td>
+    </tr>
+    <tr>
+      <td>Birthday</td>
+      <td><%= @author.birthday %></td>
+    </tr>
+  </table>
+</div>
+
+
+<%= link_to 'Edit', edit_author_path if current_author == @author %>
+
+<%= params %>

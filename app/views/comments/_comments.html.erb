@@ -1,4 +1,4 @@
-<% if params[:status] == {"status"=>"0"}  %>
+<% if params[:status] == {"status"=>"unpublished"}  %>
 <h4>Unpublished comments</h4>
   <% @post.comments.unpublished.each do |comment| %>
     <% if comment.save %>
@@ -6,18 +6,22 @@
         <div class="d-flex">
           <div class="author_name col-2">
             <%= "#{comment.author.first_name}:" %>
+            <%= image_tag(comment.author.avatar, class: 'sm-avatar', alt: '<avatar>') %>
           </div>
           <div class="comment_body col-9">
             <%= simple_format(comment.body) %>
           </div>
           <div class="col-1">
-            <%= link_to "Publish", post_comment_path(comment.post, comment), method: :patch %>
+            <%= link_to "Publish", post_comment_publish_path(comment.post, comment), method: :post %>
           </div>
         </div>
         <div class="">
-          Updated: <%= distance_of_time_in_words(comment.updated_at, Time.now) %> ago <br>
+          <% if comment.edited? %>
+            <b>EDITED</b>
+          <% end %>
         </div>
-        <%= link_to 'Destroy', [comment.post, comment], method: :delete, data: { confirm: 'Are you sure?' } %>
+        <%= link_to 'Edit', edit_post_comment_path(@post, comment) unless deny_edit(comment) %>
+        <%= link_to 'Destroy', [@post, comment], method: :delete, data: { confirm: 'Are you sure?' } if current_author == comment.author %>
       </div>
     <% end %>
   <% end %>
@@ -29,15 +33,19 @@
         <div class="d-flex">
           <div class="author_name col-2">
             <%= "#{comment.author.first_name}:" %>
+            <%= image_tag(comment.author.avatar, class: 'sm-avatar', alt: '<avatar>') %>
           </div>
           <div class="comment_body col-9">
             <%= simple_format(comment.body) %>
           </div>
         </div>
         <div class="">
-          Updated: <%= distance_of_time_in_words(comment.updated_at, Time.now) %> ago <br>
+          <% if comment.edited? %>
+            <b>EDITED</b>
+          <% end %>
         </div>
-        <%= link_to 'Destroy', [comment.post, comment], method: :delete, data: { confirm: 'Are you sure?' } %>
+        <%= link_to 'Edit', edit_post_comment_path(@post, comment) unless deny_edit(comment) %>
+        <%= link_to 'Destroy', [@post, comment], method: :delete, data: { confirm: 'Are you sure?' } if current_author == comment.author %>
       </div>
     <% end %>
   <% end %>

@@ -1,4 +1,6 @@
 <p id="notice"><%= notice %></p>
+<p id="alert"><%= alert %></p>
+
 <div class="post">
   <div class="block bg-primary bg-opacity-75 text-center col-6">
     <div class="">
@@ -10,7 +12,7 @@
     </div>
     <br><br>
     <div class="">
-        <%= image_tag(@post.image, style: "max-height: 300px; max-width: 300px") if @post.image %>
+        <%= image_tag(@post.image, style: "max-height: 300px; max-width: 300px", alt: '<image>') if @post.image %>
     </div>
   </div>
 </div>
@@ -30,4 +32,9 @@
 </div>
 <hr>
 <h3>Add Comment</h3>
-<%= render 'comments/form', comment: @comment %>
+<% if current_author %>
+  <%= render 'comments/form', comment: @comment %>
+<% else %>
+  <p>Only authorized users can add comments</p>
+<% end %>
+<%= params %>
