@@ -43,8 +43,8 @@ ActiveRecord::Schema.define(version: 2022_01_15_114105) do
     t.text "content"
     t.string "image"
     t.bigint "author_id"
-    t.integer "comments_count"
     t.integer "views_count", default: 0
+    t.integer "comments_count"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["author_id"], name: "index_posts_on_author_id"

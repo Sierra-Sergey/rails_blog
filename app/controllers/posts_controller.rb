@@ -7,7 +7,7 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    @posts = Post.all.sort_by {:id}
+    @posts = Post.order(:created_at)
   end
 
   def search
@@ -78,7 +78,7 @@ class PostsController < ApplicationController
     end
 
     def update_views_counter
-      @post.update_column(:views_count, @post.views_count + 1)
+      @post.increment!(:views_count)
     end
 
     # Only allow a list of trusted parameters through.
