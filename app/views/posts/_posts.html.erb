@@ -1,0 +1,23 @@
+<div>
+  <h4><small>RECENT POSTS</small></h4>
+  <hr>
+  <% @posts.sort.reverse_each do |post| %>
+    <div class="post_title">
+      <h2><%= link_to "#{post.title}", post %></h2>
+      <h6><i class="bi bi-clock"></i> Post by <%= "#{post.author.first_name} #{post.author.last_name} #{post.created_at}" %> </h6>
+    </div>
+    <div class="post_content">
+      <%= simple_format(post.content) %>
+    </div>
+    <div class="">
+      <%= "Views: #{post.views_count} ||" %>
+      <%= "Comments: #{post.comments_count}" %>
+    </div>
+    <%= link_to 'Show', post %>
+    <%= link_to 'Edit', edit_post_path(post) if post_author?(post) %>
+    <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } if post_author?(post) %>
+    <hr>
+  <% end %>
+  <br><br>
+  <%= link_to 'New Post', new_post_path %>
+</div>

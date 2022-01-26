@@ -10,6 +10,10 @@ class PostsController < ApplicationController
     @posts = Post.all.sort_by {:id}
   end
 
+  def search
+    @posts = Post.where('title ILIKE ? OR content ILIKE ?', "%" + params[:search] + "%", "%" + params[:search] + "%")
+  end
+
   # GET /posts/1 or /posts/1.json
   def show
     @comment = Comment.new
