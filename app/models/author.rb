@@ -8,7 +8,7 @@ class Author < ApplicationRecord
 
   validates :email, :first_name, :last_name, :gender, :birthday, presence: true
   validates :email, uniqueness: true, format: { with: VALID_EMAIL_REGEX }
-  validates :password, format: { with: VALID_PASSWORD_REGEX }
+  validates :password, format: { with: VALID_PASSWORD_REGEX }, allow_nil: true
 
   before_save :downcase_email
 
