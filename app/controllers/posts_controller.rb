@@ -7,12 +7,13 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    @posts = Post.all.order(:created_at)
-    @pagy, @records = pagy(Post.order(created_at: :desc), items: 8)
+    @posts = Post.order(created_at: :desc)
+    @pagy, @records = pagy(@posts, items: 8)
   end
 
   def search
     @posts = Post.where('title ILIKE ? OR content ILIKE ?', "%" + params[:search] + "%", "%" + params[:search] + "%")
+    @pagy, @records = pagy(@posts, items: 8)
   end
 
   # GET /posts/1 or /posts/1.json
@@ -20,9 +21,9 @@ class PostsController < ApplicationController
     @comment = Comment.new
   end
 
-  def authors
-    @authors = Author.all
-  end
+  # def authors
+  #   @authors = Author.all
+  # end
 
   # GET /posts/new
   def new
