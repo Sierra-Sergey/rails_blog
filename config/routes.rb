@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :sessions
   resources :posts do
     resources :comments do
-      post 'publish', to: 'comments#publish', as: 'publish'
+      get 'publish', to: 'comments#publish', as: 'publish'
     end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
