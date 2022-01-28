@@ -1,8 +1,7 @@
 class SessionsController < ApplicationController
+  before_action :loged_in?, only: %i[ new create ]
+
   def new
-    if current_author
-      redirect_to root_url, notice: 'You are already loged in'
-    end
   end
 
   def create
@@ -19,5 +18,13 @@ class SessionsController < ApplicationController
   def destroy
     session[:author_id] = nil
     redirect_to root_url, notice: 'Logged out'
+  end
+
+  private
+
+  def loged_in?
+    if current_author
+      redirect_to root_url, notice: 'You are already loged in'
+    end
   end
 end
