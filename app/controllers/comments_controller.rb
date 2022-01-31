@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :set_post, only: %i[ edit create update destroy ]
+  before_action :set_post, only: %i[ edit create update ]
   before_action :set_comment, only: %i[ edit update destroy ]
   before_action :authorize, only: %i[ create edit destroy ]
   before_action :access_denied, only: %i[ destroy edit update ]
@@ -9,12 +9,12 @@ class CommentsController < ApplicationController
   end
 
   def edit
-    redirect_to @post, alert: "Can't be edited" if deny_edit(@comment)
+    redirect_to @post, alert: "Comment can't be edited" if deny_edit(@comment)
   end
 
   def create
-    @comment = @post.comments.create(comment_params)
-
+    @comment = @post.comments.new(comment_params.merge(author: current_author))
+    # @comment[:author_id] = current_author.id
     respond_to do |format|
       if @comment.save
         format.html { redirect_to @post, notice: "Comment was successfully created." }

@@ -2,6 +2,7 @@ class Author < ApplicationRecord
   has_secure_password
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :comment_votes, dependent: :destroy
 
   VALID_EMAIL_REGEX = /\A[\w\-\.]+@\w+\.\w+\z/i
   VALID_PASSWORD_REGEX = /\A[A-Za-z0-9\-\+_]{8,20}\z/

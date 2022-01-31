@@ -1,0 +1,10 @@
+<div class="d-flex">
+  <% if comment.comment_votes.find_by(author_id: current_author.id).present?%>
+    <%= button_to '+++', comment_votes_path, params: { comment_vote: { comment_id: comment.id } }, method: :patch %>
+  <% else %>
+    <%= button_to '+++', comment_votes_path, params: { comment_vote: { comment_id: comment.id } } %>
+  <% end %>
+</div>
+<div class="">
+
+</div>

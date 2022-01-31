@@ -1,6 +1,8 @@
 class Comment < ApplicationRecord
   belongs_to :author
   belongs_to :post, counter_cache: true
+  has_many :comment_votes, dependent: :destroy
+
   validates :body, presence: true
 
   enum status: %i[unpublished published]

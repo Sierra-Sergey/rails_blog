@@ -30,13 +30,40 @@
   <% @post.comments.published.each do |comment| %>
     <% if comment.save %>
       <div class="comment_block">
-        <div class="d-flex">
-          <div class="author_name col-2">
+        <div class="d-flex justify-content-start align-items-center">
+          <div class="author_name d-inline-flex align-self-stretch">
             <%= "#{comment.author.first_name}:" %>
             <%= image_tag(comment.author.avatar, class: 'sm-avatar', alt: '<avatar>') %>
           </div>
-          <div class="comment_body col-9">
+          <div class="comment_body d-inline-flex flex-grow-1">
             <%= simple_format(comment.body) %>
+          </div>
+          <div class="votes d-inline-flex d-flex">
+            <% if !current_author.nil? && comment.comment_votes.find_by(author_id: current_author.id).present? %>
+
+              <%= button_to comment_vote_path, params: { comment_vote: { comment_id: comment.id, vote_value: :negative } }, method: :patch, class: 'btn btn-danger d-inline-flex' do %>
+                <i class="bi bi-hand-thumbs-down"></i><%= comment.comment_votes.negative.count %>
+              <% end %>
+              <div class="votes-sum d-inline-flex justify-content-center btn btn-warning">
+                <%= votes_sum(comment) %>
+              </div>
+              <%= button_to comment_vote_path, params: { comment_vote: { comment_id: comment.id, vote_value: :positive } }, method: :patch, class: 'btn btn-success d-inline-flex' do %>
+                <i class="bi bi-hand-thumbs-up"></i><%= comment.comment_votes.positive.count %>
+              <% end %>
+
+            <% else %>
+
+              <%= button_to comment_votes_path, params: { comment_vote: { comment_id: comment.id, vote_value: :negative } }, class: 'btn btn-danger d-inline-flex' do %>
+                <i class="bi bi-hand-thumbs-down"></i><%= comment.comment_votes.negative.count %>
+              <% end %>
+              <div class="votes-sum d-inline-flex justify-content-center btn btn-warning">
+                <%= votes_sum(comment) %>
+              </div>
+              <%= button_to comment_votes_path, params: { comment_vote: { comment_id: comment.id, vote_value: :positive } }, class: 'btn btn-success d-inline-flex' do %>
+                <i class="bi bi-hand-thumbs-up"></i><%= comment.comment_votes.positive.count %>
+              <% end %>
+
+            <% end %>
           </div>
         </div>
         <div class="">
@@ -44,8 +71,10 @@
             <b>EDITED</b>
           <% end %>
         </div>
-        <%= link_to 'Edit', edit_post_comment_path(@post, comment) unless deny_edit(comment) %>
-        <%= link_to 'Destroy', [@post, comment], method: :delete, data: { confirm: 'Are you sure?' } if current_author == comment.author %>
+        <div class="">
+          <%= link_to 'Edit', edit_post_comment_path(@post, comment) unless deny_edit(comment) %>
+          <%= link_to 'Destroy', [@post, comment], method: :delete, data: { confirm: 'Are you sure?' } if current_author == comment.author %>
+        </div>
       </div>
     <% end %>
   <% end %>

@@ -37,3 +37,9 @@ max-height: 300px;
   height: 50px;
   border-radius: 50%;
 }
+
+.votes-sum {
+  width: 30px;
+  margin-left: 2px;
+  margin-right: 2px;
+}
