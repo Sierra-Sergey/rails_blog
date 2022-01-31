@@ -22,7 +22,7 @@ class CommentVotesController < ApplicationController
   private
 
   def set_comment_vote
-    @vote = current_author.comment_votes.find{:comment_id == :comment_id}
+    @vote = CommentVote.find(params[:id])
   end
 
   def vote_params
