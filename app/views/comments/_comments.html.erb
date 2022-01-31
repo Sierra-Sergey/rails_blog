@@ -39,8 +39,8 @@
             <%= simple_format(comment.body) %>
           </div>
           <div class="votes d-inline-flex d-flex">
-            <% vote = comment.comment_votes.find_by(author_id: current_author.id) %>
-            <% if !current_author.nil? && vote.present? %>
+            <% vote = comment.comment_votes.find_by(author_id: current_author.id) if current_author %>
+            <% if current_author && vote.present? %>
 
               <%= button_to comment_vote_path(vote), params: { comment_vote: { comment_id: comment.id, vote_value: :negative } }, method: :patch, class: 'btn btn-danger d-inline-flex' do %>
                 <i class="bi bi-hand-thumbs-down"></i><%= comment.comment_votes.negative.count %>
