@@ -3,5 +3,5 @@ class CommentVote < ApplicationRecord
   belongs_to :author
   belongs_to :comment
 
-  enum vote_value: %i[zero negative positive]
+  enum vote_value: %i[negative positive]
 end
