@@ -1,10 +1,11 @@
-<div class="d-flex">
-  <% if comment.comment_votes.find_by(author_id: current_author.id).present?%>
-    <%= button_to '+++', comment_votes_path, params: { comment_vote: { comment_id: comment.id } }, method: :patch %>
-  <% else %>
-    <%= button_to '+++', comment_votes_path, params: { comment_vote: { comment_id: comment.id } } %>
+<div class="votes d-inline-flex d-flex" id="votes-<%= comment.id %>">
+  <%= button_to comment_vote_path, params: { comment_vote: { comment_id: comment.id, vote_value: :negative } }, class: 'btn btn-danger d-inline-flex', remote: true do %>
+    <i class="bi bi-hand-thumbs-down"></i><%= comment.comment_votes.negative.count %>
   <% end %>
-</div>
-<div class="">
-
+  <div class="votes-sum d-inline-flex justify-content-center btn btn-warning">
+    <%= votes_sum(comment) %>
+  </div>
+  <%= button_to comment_vote_path, params: { comment_vote: { comment_id: comment.id, vote_value: :positive } }, class: 'btn btn-success d-inline-flex', remote: true do %>
+    <i class="bi bi-hand-thumbs-up"></i><%= comment.comment_votes.positive.count %>
+  <% end %>
 </div>
