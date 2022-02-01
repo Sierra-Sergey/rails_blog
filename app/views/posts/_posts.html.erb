@@ -1,7 +1,9 @@
 <div>
   <h4><small>RECENT POSTS</small></h4><br>
-  <%== pagy_bootstrap_nav(@pagy) %>
-  <%== pagy_info(@pagy) %>
+  <% if @pagy.pages > 1 %>
+    <%== pagy_bootstrap_nav(@pagy) %>
+    <%== pagy_info(@pagy) %>
+  <% end %>
   <hr>
   <% @records.each do |post| %>
     <div class="post_title">
@@ -22,6 +24,8 @@
   <% end %>
   <br><br>
   <%= link_to 'New Post', new_post_path %><br><br>
-  <%== pagy_bootstrap_nav(@pagy) %>
-  <%== pagy_info(@pagy) %>
+  <% if @pagy.pages > 1 %>
+    <%== pagy_bootstrap_nav(@pagy) %>
+    <%== pagy_info(@pagy) %>
+  <% end %>
 </div>
