@@ -35,7 +35,7 @@ class CommentsController < ApplicationController
       if @comment.update(comment_params)
         format.html { redirect_to post_url(@comment.post), notice: "Comment was successfully updated." }
       else
-        format.html { redirect_to action: :edit, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_entity }
       end
     end
   end
@@ -43,7 +43,7 @@ class CommentsController < ApplicationController
   def destroy
     @comment.destroy
     respond_to do |format|
-      format.html { redirect_to @comment.post, notice: "Comment was successfully destroyed." }
+      format.js
     end
   end
 

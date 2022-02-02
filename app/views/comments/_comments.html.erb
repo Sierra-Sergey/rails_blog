@@ -1,8 +1,8 @@
 <% if params[:status] == {"status"=>"unpublished"}  %>
 <h4>Unpublished comments</h4>
-  <% @comments.unpublished.each do |comment| %>
+  <% @post.comments.unpublished.order(created_at: :asc).each do |comment| %>
     <% if comment.save %>
-      <div class="comment_block">
+      <div class="comment_block" id="comment-<%= comment.id %>">
         <div class="d-flex">
           <div class="author_name col-2">
             <%= "#{comment.author.first_name}:" %>
@@ -21,15 +21,15 @@
           <% end %>
         </div>
         <%= link_to 'Edit', edit_post_comment_path(@post, comment) unless deny_edit(comment) %>
-        <%= link_to 'Destroy', [@post, comment], method: :delete, data: { confirm: 'Are you sure?' } if current_author == comment.author %>
+        <%= link_to 'Destroy', [@post, comment], method: :delete, data: { confirm: 'Are you sure?' }, remote: true if current_author == comment.author %>
       </div>
     <% end %>
   <% end %>
 <% else %>
 <h4>Published comments</h4>
-  <% @comments.published.each do |comment| %>
+  <% @post.comments.published.order(created_at: :asc).each do |comment| %>
     <% if comment.save %>
-      <div class="comment_block" data-comment-id="<%= comment.id %>">
+      <div class="comment_block" id=<%= "comment-#{comment.id}" %>>
         <div class="d-flex justify-content-start align-items-center">
           <div class="author_name d-inline-flex align-self-stretch">
             <%= "#{comment.author.first_name}:" %>
@@ -47,7 +47,7 @@
         </div>
         <div class="">
           <%= link_to 'Edit', edit_post_comment_path(@post, comment) unless deny_edit(comment) %>
-          <%= link_to 'Destroy', [@post, comment], method: :delete, data: { confirm: 'Are you sure?' } if current_author == comment.author %>
+          <%= link_to 'Destroy', [@post, comment], method: :delete, data: { confirm: 'Are you sure?' }, remote: true if current_author == comment.author %>
         </div>
       </div>
     <% end %>
