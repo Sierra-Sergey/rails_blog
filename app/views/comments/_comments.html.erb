@@ -1,6 +1,6 @@
 <% if params[:status] == {"status"=>"unpublished"}  %>
 <h4>Unpublished comments</h4>
-  <% @post.comments.unpublished.each do |comment| %>
+  <% @comments.unpublished.each do |comment| %>
     <% if comment.save %>
       <div class="comment_block">
         <div class="d-flex">
@@ -27,7 +27,7 @@
   <% end %>
 <% else %>
 <h4>Published comments</h4>
-  <% @post.comments.published.each do |comment| %>
+  <% @comments.published.each do |comment| %>
     <% if comment.save %>
       <div class="comment_block" data-comment-id="<%= comment.id %>">
         <div class="d-flex justify-content-start align-items-center">
