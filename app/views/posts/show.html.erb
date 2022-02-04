@@ -31,9 +31,17 @@
 <div class="">
   <%= render 'posts/change_status_view_comments' %>
 </div>
-<div class="comments-block">
-  <%= render 'comments/comments' %>
-</div>
+<% if params[:status] == {"status"=>"unpublished"} %>
+  <div class="comments-block unpublished" id="comments">
+    <h4>Unpublished comments</h4>
+    <%= render @comments %>
+  </div>
+<% else %>
+  <div class="comments-block" id="comments">
+    <h4>Published comments</h4>
+    <%= render @comments.published %>
+  </div>
+<% end %>
 <hr>
 <h3>Add Comment</h3>
 <% if current_author %>

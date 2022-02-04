@@ -1,0 +1,23 @@
+<div class="comment-block" id="comment-<%= comment.id %>">
+  <div class="d-flex justify-content-start align-items-center">
+    <div class="author-name d-inline-flex align-self-stretch">
+      <%= "#{comment.author.first_name}:" %>
+      <%= image_tag(comment.author.avatar, class: 'sm-avatar', alt: '<avatar>') %>
+    </div>
+    <div class="comment-body d-inline-flex flex-grow-1">
+      <%= simple_format(comment.body) %>
+    </div>
+    <% if comment.published? %>
+      <%= render 'comment_votes/votes', comment: comment %>
+    <% else %>
+      <%= link_to "Publish", post_comment_publish_path(comment.post, comment), method: :post %>
+    <% end %>
+  </div>
+  <% if comment.edited? %>
+    <div class="">
+        <b>EDITED</b>
+    </div>
+  <% end %>
+  <%= link_to 'Edit', edit_post_comment_path(@post, comment) unless deny_edit(comment) %>
+  <%= link_to 'Destroy', [@post, comment], method: :delete, data: { confirm: 'Are you sure?' }, remote: true if current_author == comment.author %>
+</div>

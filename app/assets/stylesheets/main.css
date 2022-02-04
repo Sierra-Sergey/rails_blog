@@ -1,10 +1,10 @@
-.comment_block {
+.comment-block {
   margin: 0.5em;
   background-color: lightyellow;
   padding: 0.5em;
 }
 
-.comment_body {
+.comment-body {
   background-color: white;
   min-height: 2em;
   margin: 0.5em;

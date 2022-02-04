@@ -14,9 +14,9 @@ class CommentsController < ApplicationController
 
   def create
     @comment = @post.comments.new(comment_params.merge(author: current_author))
-    # @comment[:author_id] = current_author.id
     respond_to do |format|
       if @comment.save
+        format.js
         format.html { redirect_to @post, notice: "Comment was successfully created." }
       else
         format.html { render 'posts/show', status: :unprocessable_entity }
