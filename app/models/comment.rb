@@ -13,4 +13,7 @@ class Comment < ApplicationRecord
   def edited?
     self.created_at != self.updated_at
   end
+
+  has_ancestry
+
 end

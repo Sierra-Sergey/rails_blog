@@ -1,1 +1,3 @@
-document.querySelector('#comments').append("<%= j render 'comments/comment', comment: @comment %>");
+$('#comments').append("<%= j render @comment %>");
+$('#notice').append("<p><%= j "#{notice}" %></p>");
+<% notice.clear %>

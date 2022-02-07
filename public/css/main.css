@@ -43,3 +43,11 @@ max-height: 300px;
   margin-left: 2px;
   margin-right: 2px;
 }
+
+.sub-comment-form {
+  display: none;
+}
+
+.votes {
+  margin-right: 0.5em;
+}

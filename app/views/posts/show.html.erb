@@ -34,18 +34,18 @@
 <% if params[:status] == {"status"=>"unpublished"} %>
   <div class="comments-block unpublished" id="comments">
     <h4>Unpublished comments</h4>
-    <%= render @comments %>
+    <%= render @comments.unpublished.roots %>
   </div>
 <% else %>
   <div class="comments-block" id="comments">
     <h4>Published comments</h4>
-    <%= render @comments.published %>
+    <%= render @comments.published.roots %>
   </div>
 <% end %>
 <hr>
 <h3>Add Comment</h3>
 <% if current_author %>
-  <%= render 'comments/form', comment: @comment %>
+  <%= render 'comments/form', comment: @comment, parent: nil %>
 <% else %>
   <p>Only authorized users can add comments</p>
 <% end %>

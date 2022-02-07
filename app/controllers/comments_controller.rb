@@ -13,11 +13,12 @@ class CommentsController < ApplicationController
   end
 
   def create
+    byebug
     @comment = @post.comments.new(comment_params.merge(author: current_author))
     respond_to do |format|
       if @comment.save
-        format.js
-        format.html { redirect_to @post, notice: "Comment was successfully created." }
+        format.js { flash.notice = 'Comment was successfully created.' }
+        format.html { redirect_to @post, notice: 'Comment was successfully created.' }
       else
         format.html { render 'posts/show', status: :unprocessable_entity }
       end
@@ -50,7 +51,7 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:comment).permit(:body, :post_id, :author_id)
+    params.require(:comment).permit(:body, :post_id, :author_id, :parent_id, :parent)
   end
 
   def set_comment

@@ -20,4 +20,20 @@
   <% end %>
   <%= link_to 'Edit', edit_post_comment_path(@post, comment) unless deny_edit(comment) %>
   <%= link_to 'Destroy', [@post, comment], method: :delete, data: { confirm: 'Are you sure?' }, remote: true if current_author == comment.author %>
+  <a href="#" class="comment-form-display">reply</a>
+  <div class="sub-comment-form">
+    <%= render 'comments/form', parent: comment %>
+  </div>
+  <div class="sub-comment">
+    <%= render comment.children %>
+  </div>
 </div>
+
+<script>
+  document.querySelectorAll('.comment-form-display').forEach((el) => {
+    el.addEventListener('click', (ev) => {
+      ev.preventDefault();
+      el.nextElementSibling.style = 'display: block;';
+    })
+  })
+</script>
