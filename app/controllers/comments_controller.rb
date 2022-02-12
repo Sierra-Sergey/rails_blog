@@ -13,7 +13,6 @@ class CommentsController < ApplicationController
   end
 
   def create
-    byebug
     @comment = @post.comments.new(comment_params.merge(author: current_author))
     respond_to do |format|
       if @comment.save
