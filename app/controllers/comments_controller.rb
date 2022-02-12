@@ -16,6 +16,7 @@ class CommentsController < ApplicationController
     @comment = @post.comments.new(comment_params.merge(author: current_author))
     respond_to do |format|
       if @comment.save
+        @comment.update_column(:status, :published) if @comment.has_parent?
         format.js { flash.notice = 'Comment was successfully created.' }
         format.html { redirect_to @post, notice: 'Comment was successfully created.' }
       else
